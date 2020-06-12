@@ -13,14 +13,13 @@ from models import *
 from prep_data import *
 from tests import *
 
-def save_mlflow(model,result,config_model):
-    model_name = model.__class__.__name__
+def save_mlflow(model,result,config_model,model_name):
+    data_path = config_model['model_output']['path']
+    mlflow.set_tracking_uri(data_path+'/mlruns')
+    
     #Salvando dados no mlflow
     experiment_id = mlflow.set_experiment(config_model['experiment_name']) 
-    if 'run_name' in config_model['models'][model_name].keys():
-        run_name = config_model['models'][model_name]['run_name']
-    else:
-        run_name = model_name
+    run_name = model_name
     mlflow.start_run(run_name=run_name)
     model_id = mlflow.active_run().info.run_id
     #Salvando metricas
@@ -28,13 +27,14 @@ def save_mlflow(model,result,config_model):
     #Colocando metricas no mlflow
     for column in result:
         mlflow.log_metric(column,result[column])
-    mlflow.set_tag('type',model_name)
-    mlflow.sklearn.save_model(model,'model/'+str(model_id))
-    mlflow.sklearn.log_model(model,artifact_path='model/'+str(model_id)+'_log')
+    mlflow.set_tag('type',model.__class__.__name__)
+    mlflow.sklearn.save_model(model,f"{data_path}/model/{str(model_id)}")
+    mlflow.sklearn.log_model(model,f"model/{str(model_id)}_log")
     mlflow.end_run()
 
 def save_output(config_model,list_result,output_dict):
     out_type = config_model['model_output']['type'] 
+    data_path = config_model['model_output']['path']
     if out_type == 'normal':
         output_table = pd.concat(list_result, axis=1, keys=config_model["models"].keys())
     else:
@@ -47,15 +47,14 @@ def save_output(config_model,list_result,output_dict):
     #save table
     time_stamp_id = str(int(datetime.now().timestamp()))[-5:]
     output_table_name = f"model_output_{time_stamp_id}.csv"
-    output_table_path = config_model['model_output']['path']
-    output_table.to_csv(f"{output_table_path}/{output_table_name}")
-    print(f"Tabela salva em {output_table_path}/{output_table_name}")
+    output_table.to_csv(f"{data_path}/output/{output_table_name}")
+    print(f"Tabela salva em {data_path}/output/{output_table_name}")
 
     #save dict
-    output_dict['table_path'] = f"{output_table_path}/{output_table_name}"
-    with open(f'{output_table_path}/output_dict.json', 'w') as outfile:
+    output_dict['table_path'] = f"{data_path}/output/{output_table_name}"
+    with open(f'{data_path}/output/output_dict.json', 'w') as outfile:
         json.dump(output_dict, outfile, indent=2)
-    print(f"dados dos modelos salvos em {output_table_path}/{output_table_name}")
+    print(f"dados dos modelos salvos em {data_path}/output/{output_table_name}")
 
     
 #Paths
@@ -101,7 +100,7 @@ for model_name in config_model['models'] :
     list_result.append(result)
     #Save files
     output_dict[model_name] = model.get_params()
-    save_mlflow(model,result,config_model)
+    save_mlflow(model,result,config_model,model_name)
     
     
 save_output(config_model,list_result,output_dict)

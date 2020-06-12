@@ -1,0 +1,29 @@
+[2020-06-12 14:35:54,452] {taskinstance.py:669} INFO - Dependencies all met for <TaskInstance: dataops.unit_test 2020-06-11T00:00:00+00:00 [queued]>
+[2020-06-12 14:35:54,482] {taskinstance.py:669} INFO - Dependencies all met for <TaskInstance: dataops.unit_test 2020-06-11T00:00:00+00:00 [queued]>
+[2020-06-12 14:35:54,482] {taskinstance.py:879} INFO - 
+--------------------------------------------------------------------------------
+[2020-06-12 14:35:54,482] {taskinstance.py:880} INFO - Starting attempt 11 of 14
+[2020-06-12 14:35:54,482] {taskinstance.py:881} INFO - 
+--------------------------------------------------------------------------------
+[2020-06-12 14:35:54,502] {taskinstance.py:900} INFO - Executing <Task(BashOperator): unit_test> on 2020-06-11T00:00:00+00:00
+[2020-06-12 14:35:54,504] {standard_task_runner.py:53} INFO - Started process 21711 to run task
+[2020-06-12 14:35:54,601] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: dataops.unit_test 2020-06-11T00:00:00+00:00 [running]> vinicius-Latitude-3480
+[2020-06-12 14:35:54,633] {bash_operator.py:82} INFO - Tmp dir root location: 
+ /tmp
+[2020-06-12 14:35:54,634] {bash_operator.py:103} INFO - Temporary script location: /tmp/airflowtmputn11k3s/unit_testuutt3e92
+[2020-06-12 14:35:54,634] {bash_operator.py:115} INFO - Running command: python /home/vinicius/Documents/Projetos/Claro/Piloto/git_Homologação/src/unit_test/unit_test.py
+[2020-06-12 14:35:54,641] {bash_operator.py:122} INFO - Output:
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Iniciando tests...
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Tabela salesfacts
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Tabela products
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Tabela geo
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Tabela date
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Tabela manufacturer
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - convert_json
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - 
+[2020-06-12 14:36:00,564] {bash_operator.py:126} INFO - Testes finalizados, salvos em:
+[2020-06-12 14:36:00,565] {bash_operator.py:126} INFO - /tmp/test_out.json
+[2020-06-12 14:36:00,565] {bash_operator.py:126} INFO - 
+[2020-06-12 14:36:00,661] {bash_operator.py:128} INFO - Command exited with return code 0
+[2020-06-12 14:36:00,682] {taskinstance.py:1052} INFO - Marking task as SUCCESS.dag_id=dataops, task_id=unit_test, execution_date=20200611T000000, start_date=20200612T173554, end_date=20200612T173600
+[2020-06-12 14:36:04,421] {logging_mixin.py:112} INFO - [2020-06-12 14:36:04,420] {local_task_job.py:103} INFO - Task exited with return code 0
