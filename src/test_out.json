@@ -1,0 +1,210 @@
+{
+  "salesfacts": {
+    "test_columns": [
+      "index",
+      "ProductID",
+      "Date",
+      "Zip",
+      "Units",
+      "Revenue"
+    ],
+    "test_types": "False",
+    "test_null_percent": {
+      "index": "0.0",
+      "ProductID": "0.0",
+      "Date": "0.0",
+      "Zip": "0.0",
+      "Units": "0.0",
+      "Revenue": "3.252027361447771e-05"
+    },
+    "test_n_uniques": {
+      "index": "1260752",
+      "ProductID": "1893",
+      "Date": "5149",
+      "Zip": "32595",
+      "Units": "36",
+      "Revenue": "3774"
+    },
+    "test_category_percent": "0.3333333333333333"
+  },
+  "products": {
+    "test_columns": [
+      "index",
+      "Manufacturer",
+      "Category",
+      "Segment",
+      "Product",
+      "ProductID",
+      "isVanArsdel",
+      "IsCompeteHide",
+      "ManufacturerID",
+      "IsCompete"
+    ],
+    "test_types": {
+      "index": "int64",
+      "Manufacturer": "object",
+      "Category": "object",
+      "Segment": "object",
+      "Product": "object",
+      "ProductID": "int64",
+      "isVanArsdel": "object",
+      "IsCompeteHide": "object",
+      "ManufacturerID": "int64",
+      "IsCompete": "object"
+    },
+    "test_null_percent": {
+      "index": "0.0",
+      "Manufacturer": "0.0",
+      "Category": "0.0",
+      "Segment": "0.0",
+      "Product": "0.0",
+      "ProductID": "0.0",
+      "isVanArsdel": "0.0",
+      "IsCompeteHide": "0.0",
+      "ManufacturerID": "0.0",
+      "IsCompete": "0.0"
+    },
+    "test_n_uniques": {
+      "index": "2412",
+      "Manufacturer": "14",
+      "Category": "4",
+      "Segment": "8",
+      "Product": "2172",
+      "ProductID": "2412",
+      "isVanArsdel": "2",
+      "IsCompeteHide": "2",
+      "ManufacturerID": "14",
+      "IsCompete": "2"
+    },
+    "test_category_percent": "0.7"
+  },
+  "geo": {
+    "test_columns": [
+      "index",
+      "Zip",
+      "City",
+      "State",
+      "Region",
+      "District"
+    ],
+    "test_types": {
+      "index": "int64",
+      "Zip": "int64",
+      "City": "object",
+      "State": "object",
+      "Region": "object",
+      "District": "object"
+    },
+    "test_null_percent": {
+      "index": "0.0",
+      "Zip": "0.0",
+      "City": "0.0",
+      "State": "0.0",
+      "Region": "0.0",
+      "District": "0.0"
+    },
+    "test_n_uniques": {
+      "index": "39948",
+      "Zip": "39948",
+      "City": "28575",
+      "State": "49",
+      "Region": "3",
+      "District": "39"
+    },
+    "test_category_percent": "0.6666666666666666"
+  },
+  "date": {
+    "test_columns": [
+      "index",
+      "Date",
+      "MonthNo",
+      "MonthName",
+      "MonthID",
+      "Month",
+      "Quarter",
+      "Year",
+      "RunningMonths",
+      "Running Year",
+      "Running Months",
+      "Rolling Period",
+      "Rolling Period Sort",
+      "MonthIndex"
+    ],
+    "test_types": {
+      "index": "int64",
+      "Date": "int64",
+      "MonthNo": "int64",
+      "MonthName": "object",
+      "MonthID": "int64",
+      "Month": "object",
+      "Quarter": "object",
+      "Year": "int64",
+      "RunningMonths": "int64",
+      "Running Year": "float64",
+      "Running Months": "object",
+      "Rolling Period": "object",
+      "Rolling Period Sort": "float64",
+      "MonthIndex": "int64"
+    },
+    "test_null_percent": {
+      "index": "0.0",
+      "Date": "0.0",
+      "MonthNo": "0.0",
+      "MonthName": "0.0",
+      "MonthID": "0.0",
+      "Month": "0.0",
+      "Quarter": "0.0",
+      "Year": "0.0",
+      "RunningMonths": "0.0",
+      "Running Year": "0.058785633757448864",
+      "Running Months": "0.8234820421968111",
+      "Rolling Period": "0.8234820421968111",
+      "Rolling Period Sort": "0.8234820421968111",
+      "MonthIndex": "0.0"
+    },
+    "test_n_uniques": {
+      "index": "6209",
+      "Date": "6209",
+      "MonthNo": "12",
+      "MonthName": "12",
+      "MonthID": "204",
+      "Month": "204",
+      "Quarter": "4",
+      "Year": "17",
+      "RunningMonths": "204",
+      "Running Year": "16",
+      "Running Months": "3",
+      "Rolling Period": "12",
+      "Rolling Period Sort": "12",
+      "MonthIndex": "204"
+    },
+    "test_category_percent": "0.35714285714285715"
+  },
+  "manufacturer": {
+    "test_columns": [
+      "index",
+      "ManufacturerID",
+      "Manufacturer",
+      "MfgisVanArsdel"
+    ],
+    "test_types": {
+      "index": "int64",
+      "ManufacturerID": "int64",
+      "Manufacturer": "object",
+      "MfgisVanArsdel": "object"
+    },
+    "test_null_percent": {
+      "index": "0.0",
+      "ManufacturerID": "0.0",
+      "Manufacturer": "0.0",
+      "MfgisVanArsdel": "0.0"
+    },
+    "test_n_uniques": {
+      "index": "14",
+      "ManufacturerID": "14",
+      "Manufacturer": "14",
+      "MfgisVanArsdel": "2"
+    },
+    "test_category_percent": "0.5"
+  }
+}

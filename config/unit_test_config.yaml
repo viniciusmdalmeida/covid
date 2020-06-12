@@ -1,0 +1,37 @@
+date:
+  cat_types:
+  - object
+  - category
+  max_null: 0.2
+  tests: []
+geo:
+  cat_types:
+  - object
+  - category
+  max_null: 0.2
+  tests: []
+manufacturer:
+  cat_types:
+  - object
+  - category
+  max_null: 0.2
+  tests: []
+products:
+  cat_types:
+  - object
+  - category
+  max_null: 0.2
+  tests: []
+salesfacts:
+  cat_types:
+  - object
+  - category
+  max_null: 0.2
+  tests: []
+  types:
+    Date: datetime
+    ProductID: int
+    Revenue: float
+    Units: int
+    Zip: int
+    index: int

@@ -1,0 +1,5 @@
+,fit_time,score_time,test_r2,test_neg_mean_absolute_error,test_neg_mean_squared_error
+LinearRegression,0.24541568756103516,0.0,,,
+KNeighborsRegressor,0.25244903564453125,0.0,,,
+DecisionTreeRegressor,0.2474523067474365,0.0,,,
+RandomForestRegressor,0.27809648513793944,0.0,,,

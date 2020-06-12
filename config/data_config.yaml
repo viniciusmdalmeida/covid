@@ -1,0 +1,13 @@
+connection:
+  database: piloto_claro
+  driver: postgresql+psycopg2
+  host: localhost
+  password: postgres
+  port: 5432
+  user: postgres
+tables:
+- salesfacts
+- products
+- geo
+- date
+- manufacturer

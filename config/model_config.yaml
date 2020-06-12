@@ -1,0 +1,30 @@
+experiment_name: Test_model
+model_output:
+  path: /home/vinicius/Documents/Projetos/Claro/Piloto/git_Homologação/src/modeling/output
+  type: mean
+models:
+  KN_3:
+    class: KNeighborsRegressor
+    params:
+      p: 3 
+      weights: distance
+    run_name: KN_3
+  KN_4:
+    class: KNeighborsRegressor
+    params:  
+      p: 4 
+      weights: distance
+    run_name: KN_4
+  test_LR:
+    class:  LinearRegression
+    params: {}
+prep_data:
+  percent_sample: 0.05
+test:
+  cv: 5
+  func: cross_validate
+  operation: mean
+  scoring:
+  - r2
+  - neg_mean_absolute_error
+  - neg_mean_squared_error
