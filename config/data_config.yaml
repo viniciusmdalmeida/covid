@@ -5,9 +5,35 @@ connection:
   password: postgres
   port: 5432
   user: postgres
+
+get_data:
+  get_base:
+    func: get_base
+    params: 
+      params: {} 
+  get_eur:
+    func: get_exchange
+    paramns:  
+      base: USD
+      symbol: EUR
+      start_date: 2000-01-01
+      end_date: 2014-12-31
+  get_brl:
+    func: get_exchange
+    paramns:  
+      base: USD
+      symbol: BRL
+      start_date: 2008-01-01
+      end_date: 2014-12-31
+
 tables:
 - salesfacts
 - products
 - geo
 - date
 - manufacturer
+
+prep_data:
+  start_predict: 2014-10-01
+  func: null
+

@@ -1,28 +1,19 @@
-experiment_name: Test_model
-model_output:
-  path: /home/vinicius/Documents/Projetos/Claro/Piloto/git_Homologação/data
-  type: mean
-models:
-  KN_Test_2:
-    class: KNeighborsRegressor
-    params:
-      p: 3 
-      weights: distance
-  KN_4:
-    class: KNeighborsRegressor
-    params:  
-      p: 4 
-      weights: distance
-  test_LR:
-    class:  LinearRegression
-    params: {}
-prep_data:
-  percent_sample: 0.05
+model:
+  id: 5e0724a764f94c38b06ee98706c63d97
+  models_path: /home/vinicius/Documents/Projetos/Claro/Piloto/experimentacao/data/model
+  retrain:
+    func: retrain_model
+    paramns:
+      end_data: 2013-01-01
+      target: revenue
+predict:
+  func: predict
+  output:
+    path: /home/vinicius/Documents/Projetos/Claro/Piloto/industrializacao/data
+  save_func: save_predict
 test:
-  cv: 5
-  func: cross_validate
-  operation: mean
-  scoring:
-  - r2
-  - neg_mean_absolute_error
-  - neg_mean_squared_error
+  paramns: {}
+  save_func:
+  - save_mlflow
+  - save_csv
+  test_func: test_func

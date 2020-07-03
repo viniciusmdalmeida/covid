@@ -1,0 +1,67 @@
+.lista_opcoes{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.div_horizontal{
+    padding: 5px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.opcao-item{
+    display:inline !important;
+}
+
+
+.texto-opcao{
+    color: black;
+    padding-right:5px;
+}
+
+.grafico{
+    padding: 5px;
+    /*box-shadow: 0 0 0.3em black;*/
+}
+
+.svg-container{
+    border-radius:7px;
+    box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
+
+.main-svg{
+    border-radius:7px;
+}
+
+.indicator{
+    width: 25%;
+}
+
+.Select-control{
+    width:100%;
+}
+
+.DateInput{
+    background : none !important;
+}
+
+.DateRangePickerInput{
+    background : none !important;
+}
+
+.DateRangePickerInput__withBorder{
+    border: none;
+}
+
+.div-opcoes{
+    display: flex;
+    align-items: center;
+}
+
+.plot{
+    border-radius: 7px !important;
+    box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.2);
+}

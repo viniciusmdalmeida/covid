@@ -1,37 +1,46 @@
-date:
-  cat_types:
-  - object
-  - category
-  max_null: 0.2
-  tests: []
-geo:
-  cat_types:
-  - object
-  - category
-  max_null: 0.2
-  tests: []
-manufacturer:
-  cat_types:
-  - object
-  - category
-  max_null: 0.2
-  tests: []
-products:
-  cat_types:
-  - object
-  - category
-  max_null: 0.2
-  tests: []
-salesfacts:
-  cat_types:
-  - object
-  - category
-  max_null: 0.2
-  tests: []
-  types:
-    Date: datetime
-    ProductID: int
-    Revenue: float
-    Units: int
-    Zip: int
-    index: int
+output: 
+  path: /home/vinicius/Documents/Projetos/Claro/Piloto/industrializacao/data/unit_test/unit_test.json
+tests:
+  - test_columns
+  - test_types
+  - test_null_percent
+  - test_n_uniques
+  - test_category_percent
+tables:
+  date:
+    tests: all
+    cat_types:
+    - object
+    - category
+    max_null: 0.2
+  geo:
+    tests: all
+    cat_types:
+    - object
+    - category
+    max_null: 0.2
+  manufacturer:
+    tests: all
+    cat_types:
+    - object
+    - category
+    max_null: 0.2
+  products:
+    tests: all
+    cat_types:
+    - object
+    - category
+    max_null: 0.2
+  salesfacts:
+    tests: all
+    cat_types:
+    - object
+    - category
+    max_null: 0.2
+    types:
+      date: datetime
+      productid: int
+      revenue: float
+      units: int
+      zip: int
+      index: int

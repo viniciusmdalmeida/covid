@@ -1,0 +1,72 @@
+body {
+  background: #203047;
+  font-family: "Montserrat";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header{
+    background: linear-gradient (#142E4B,#12162B);
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+a{
+    width:10%;
+}
+
+.title{
+    color:#F2D139;
+    font-size: 30px;
+    margin: 0px;
+}
+
+#image_header{
+    justify-self: flex-end;
+    height: 100%;
+}
+
+#tabs-parent{
+    background-color:rgba(0,0,0,0) important!;
+    background:rgba(0,0,0,0) important!;
+}
+.custom-tabs {
+    background-color:rgba(0,0,0,0) important!;
+    background:rgba(0,0,0,0) important!;
+}
+.custom-tab {
+    color: white;
+    background-color:none !important;
+    background:none !important;
+    border-bottom: 1px solid #d6d6d6;
+    border-top: 3px solid transparent !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-bottom: 0px !important;
+    display: flex !important;
+}
+
+.custom-tab:before{
+    content: "|";
+    position: relative;
+    left: -25px;
+    float: inherit;
+    font-weight: normal;
+}
+
+.custom-tab{
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 100% !important;
+}
+
+.custom-tab:first-of-type:before{
+    content: none;
+}
+.custom-tab--selected{
+    color: white !important;
+    font-weight: bold;
+    border-bottom: 3px solid #F2D139 !important;
+}
+
