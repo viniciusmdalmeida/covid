@@ -56,7 +56,7 @@ class BrasilDada():
         df_casos = df_casos.set_index('date')
         if cumulative:
             df_casos = df_casos.cumsum()
-        df_casos = df_casos.sor_index()
+        df_casos = df_casos.sort_index()
         return df_casos
     
     def get_mortes_time(self,city,start,end,cumulative=False):
