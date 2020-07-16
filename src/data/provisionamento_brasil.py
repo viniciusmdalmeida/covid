@@ -7,7 +7,7 @@ import shutil
 import requests
 
 #Path config
-data_path = '../../../data/raw/'
+data_path = '../../data/raw/'
 config_data_path = '../../config/data_config.yaml'
 
 #Links download dados

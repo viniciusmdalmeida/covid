@@ -18,7 +18,7 @@ class Database:
 
     def connect(self,config_data=None):
         if config_data is None:
-            project_path = '/home/vinicius/Documents/Projetos/Covid/industrializacao'
+            project_path = '../..'
             conf_path = f'{project_path}/config'
             conf_data_path = f'{conf_path}/data_config.yaml'
             config_data_file = open(conf_data_path)
