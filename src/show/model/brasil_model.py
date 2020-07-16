@@ -73,6 +73,7 @@ class BrasilDada():
         df_moving = self.db.execute_query(query)
         df_moving['date'] = pd.to_datetime(df_moving['date'])
         df_moving = df_moving.set_index(f'date')
+        df_moving.reset_index()
         return df_moving['avg']
     
     def get_option_place(self,place_type='city'):
