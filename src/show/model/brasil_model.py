@@ -66,6 +66,7 @@ class BrasilDada():
         df_mortes = df_mortes.set_index('date')
         if cumulative:
             df_mortes = df_mortes.cumsum()
+        df_casos = df_casos.sort_index()
         return df_mortes
 
     def calc_moving_average(self,column,city,start,end):
