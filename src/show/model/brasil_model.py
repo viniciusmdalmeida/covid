@@ -52,6 +52,7 @@ class BrasilDada():
     def get_casos_time(self,city,start,end,cumulative=False):
         query = f"SELECT date,sum(new_confirmed) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_casos = self.db.execute_query(query)
+        df_casos['date'] = pd.to_datetime(df_casos['date'])
         df_casos = df_casos.set_index('date')
         if cumulative:
             df_casos = df_casos.cumsum()
