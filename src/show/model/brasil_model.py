@@ -53,9 +53,10 @@ class BrasilDada():
         query = f"SELECT date,sum(new_confirmed) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_casos = self.db.execute_query(query)
         df_casos['date'] = pd.to_datetime(df_casos['date'])
-        df_casos = df_casos.set_index('date')
         if cumulative:
             df_casos = df_casos.cumsum()
+            df_casos['date'] = pd.to_datetime(df_casos['date'])
+        df_casos = df_casos.set_index('date')
         df_casos = df_casos.sort_index()
         return df_casos
     
@@ -63,9 +64,10 @@ class BrasilDada():
         query = f"SELECT date,sum(new_deaths) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_mortes = self.db.execute_query(query)
         df_mortes['date'] = pd.to_datetime(df_mortes['date'])
-        df_mortes = df_mortes.set_index('date')
         if cumulative:
             df_mortes = df_mortes.cumsum()
+            df_mortes['date'] = pd.to_datetime(df_mortes['date'])
+        df_mortes = df_mortes.set_index('date')
         df_mortes = df_mortes.sort_index()
         return df_mortes
 
