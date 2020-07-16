@@ -1,7 +1,9 @@
 import plotly.graph_objs as go
 import dash_core_components as dcc
 import dash_html_components as html
+import plotly.express as px
 import pandas as pd
+import country_converter as coco
 
 
 class Graficos:
@@ -47,8 +49,7 @@ class Graficos:
             dado = go.Scatter(x=dici_dados[key].index,
                               y=dici_dados[key].values,
                               mode="lines",
-                              name=key,
-                              marker=dict(color=cores[n_cor]))
+                              name=key)
             dados.append(dado)
             n_cor += 1
 
@@ -69,6 +70,41 @@ class Graficos:
             })
         return grafico
 
+
+    def grafico_brasil(self,dici_dados={},titulo='titulo',x_nome='X',y_nome='y',
+                         cores=['rgba(16, 112, 2, 0.8)','rgba(242, 209, 57, 0.8)']):
+        #Criando valores das linhas
+        dados = []
+        n_cor = 0 #numero da cor
+
+        key = list(dici_dados.keys())[0]
+        barras = go.Bar(x=dici_dados[key].index,
+                        y=dici_dados[key].values,
+                        name=key)
+        key = list(dici_dados.keys())[1]
+        line = go.Scatter(x=dici_dados[key].index,
+                        y=dici_dados[key].values,
+                        mode="lines",
+                        name=key)
+    
+        # Gerando o grafico
+        grafico = dcc.Graph(
+            style={'height': 300},
+            figure={
+                'data': [barras,line],
+                'layout': {
+                    'title': titulo,
+                    'xaxis' : {
+                        'title' : x_nome,
+                    },
+                    'yaxis': {
+                        'title': y_nome,
+                    }
+                }
+            })
+        return grafico
+
+
     def grafico_breakDown(self,dici_dados,titulo='titulo',x_nome='X',y_nome='y',
                           cores=['rgba(16, 112, 2, 0.8)']):
         lista_dados = []
@@ -76,7 +112,8 @@ class Graficos:
             data = go.Bar(
                 x=dici_dados[key].index,
                 y=dici_dados[key].values,
-                name = str(key)
+                name = str(key),
+                width = 0.6
             )
             lista_dados.append(data)
 
@@ -121,6 +158,18 @@ class Graficos:
                                          titulo="BreakDown {}".format(coluna.capitalize()),
                                          x_nome='Meses',y_nome='Nº Vendas')
         return grafico
+
+
+    def map_graph(self,df,locations,color,hover_name=None,geojson=None):
+        fig = px.choropleth(df, locations=locations,
+                    color=color, # lifeExp is a column of gapminder
+                    hover_name=hover_name, # column to add to hover information,
+                    color_continuous_scale = px.colors.sequential.RdBu_r)
+
+        # Gerando o grafico
+        grafico = dcc.Graph(figure=fig)
+        return grafico
+
 
     # def g_professores(self,opcao,tipo='todos',tipo2='todos',status='todos'):
     #     dados = self.dados.calc_professores(opcao,tipo,tipo2,status)

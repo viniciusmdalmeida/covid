@@ -5,6 +5,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.button-place{
+    display: flex;
+    padding: 0px 15px;
+    margin-right: 3px;
+    line-height: 35px;
+    height: 35px;
+    background: #e5e8e6;
+    color: #000000;
+}
+
+.button-place-click{
+    display: flex;
+    padding: 0px 15px;
+    margin-right: 3px;
+    line-height: 35px;
+    height: 35px;
+    background: #2F5F99;
+    color: #FFFFFF;
+}
+
+.button-place-click:focus{
+    color: #FFFFFF;
+}
+
+
 .header{
     background: linear-gradient (#142E4B,#12162B);
     display:flex;

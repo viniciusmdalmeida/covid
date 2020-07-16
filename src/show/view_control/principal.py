@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 import base64
 
 from app.globais import app
-from view_control import conteiner
+from view_control import brasil_tab,paises_tab
 
 layout = html.Div([
         #Abas
@@ -19,12 +19,12 @@ layout = html.Div([
                 parent_className='custom-tabs',
                 className='custom-tabs-container',
                 children=[
-                        dcc.Tab(label='Graficos',
-                            value='graficos',
+                        dcc.Tab(label='Mundo',
+                            value='mundo',
                             className='custom-tab',
                             selected_className='custom-tab--selected'),
-                        dcc.Tab(label='Airflow',
-                                value='airflow',
+                        dcc.Tab(label='Brasil',
+                                value='brasil',
                                 className='custom-tab',
                                 selected_className='custom-tab--selected'),
                         dcc.Tab(label='MlFlow',
@@ -32,7 +32,7 @@ layout = html.Div([
                             className='custom-tab',
                             selected_className='custom-tab--selected')
                 ],
-                value='graficos')
+                value='mundo')
         ]),
 
         #Conteudo de cada aba
@@ -52,10 +52,9 @@ layout = html.Div([
 
 @app.callback(Output("tab_content", "children"), [Input("tabs", "value")])
 def trocar_aba(tab):
-    if tab == "graficos":
-        return conteiner.layout
-    elif tab == "airflow":
-        print('location')
-        return dcc.Location(href="http://0.0.0.0:8080/", id="id_airflow")
+    if tab == "brasil":
+        return brasil_tab.layout
+    elif tab == "mundo":
+        return paises_tab.layout
     elif tab == 'mlflow':
         return dcc.Location(href="http://127.0.0.1:5000", id="id_mlflow")

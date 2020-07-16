@@ -1,6 +1,12 @@
 import dash
 
 ##########################
+#    Config file
+##########################
+data_config = None
+model_config = None
+
+##########################
 #Classe de autenticação
 ##########################
 class Auth:
@@ -17,4 +23,6 @@ auth = Auth()
 app = dash.Dash(__name__)
 server = app.server
 app.config.suppress_callback_exceptions = True
+
+
 

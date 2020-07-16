@@ -14,12 +14,8 @@ app.layout = html.Div([
               [Input('url', 'pathname')])
 def display_page(pathname):
     print(pathname)
-    if pathname == 'graphs' and auth.verify:
-        return principal.layout
-    else:
-        return login.layout
-
+    return principal.layout
+    
 if __name__ == '__main__':
-    print("Start main")
     app.run_server(port=8000, host='127.0.0.2',debug=True)
 
