@@ -72,8 +72,8 @@ class BrasilDada():
         print(query)
         df_moving = self.db.execute_query(query)
         df_moving['date'] = pd.to_datetime(df_moving['date'])
-        df_moving = df_moving.set_index(f'date')
-        df_moving = df_moving.sort_values()
+        df_moving = df_moving.set_index('date')
+        df_moving = df_moving.sort_index()
         print(df_moving)
         return df_moving['avg']
     
