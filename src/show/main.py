@@ -17,5 +17,5 @@ def display_page(pathname):
     return principal.layout
     
 if __name__ == '__main__':
-    app.run_server(debug=True, host='0.0.0.0', port=5077)
+    app.run_server(debug=, host='0.0.0.0', port=5077)
 
