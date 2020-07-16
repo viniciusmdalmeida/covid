@@ -238,6 +238,7 @@ def get_casos_acumulativo(place,start,end):
     start = start[:10]
     end = end[:10]
     df_data = mdata.get_casos_time(place,start,end,cumulative=True)
+    df_data.index = pd.to_datetime(df_data.index)
     return graficos.grafico_temporal({'mortes':df_data['sum']},
                                     titulo='Casos acumulativos',x_nome='data',y_nome='casos')
 
