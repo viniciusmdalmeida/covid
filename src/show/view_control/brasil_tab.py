@@ -205,6 +205,8 @@ def get_casos_novos(place,start,end):
     end = end[:10]
     dict_grafico['casos'] = mdata.get_casos_time(place,start,end)['sum']
     dict_grafico['media_movel'] = dict_grafico['casos'].rolling(window=7).mean()
+    dict_grafico['media_movel'].index = pd.to_datetime(dict_grafico['media_movel'].index)
+    dict_grafico['media_movel'] = dict_grafico['media_movel'].sort_index()
     return graficos.grafico_brasil(dict_grafico,
                                     titulo='Casos Diarios',x_nome='data',y_nome='casos')
 
@@ -220,6 +222,8 @@ def get_mortes_novas(place,start,end):
     end = end[:10]
     dict_grafico['mortes'] = mdata.get_mortes_time(place,start,end)['sum']
     dict_grafico['media_movel'] = dict_grafico['mortes'].rolling(window=7).mean()
+    dict_grafico['media_movel'].index = pd.to_datetime(dict_grafico['media_movel'].index)
+    dict_grafico['media_movel'] = dict_grafico['media_movel'].sort_index()
     print(dict_grafico['media_movel'])
     return graficos.grafico_brasil(dict_grafico,
                                     titulo='Mortes Diarias',x_nome='data',y_nome='mortes')
