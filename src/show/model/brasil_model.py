@@ -71,6 +71,7 @@ class BrasilDada():
             f"from casos_full where {self.place_type} = '{city}';"
         print(query)
         df_moving = self.db.execute_query(query)
+        df_moving['date'] = pd.to_datetime(df_moving['date'])
         df_moving = df_moving.set_index(f'date')
         return df_moving['avg']
     

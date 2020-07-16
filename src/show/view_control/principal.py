@@ -11,7 +11,7 @@ layout = html.Div([
         html.Div(className="header",
         children=[
                 #Titulo
-            html.H1("Piloto industrialização",
+            html.H1("Covid",
             className='title'),
             
             dcc.Tabs(
@@ -26,11 +26,7 @@ layout = html.Div([
                         dcc.Tab(label='Brasil',
                                 value='brasil',
                                 className='custom-tab',
-                                selected_className='custom-tab--selected'),
-                        dcc.Tab(label='MlFlow',
-                            value='mlflow',
-                            className='custom-tab',
-                            selected_className='custom-tab--selected')
+                                selected_className='custom-tab--selected')
                 ],
                 value='mundo')
         ]),
