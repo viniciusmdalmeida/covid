@@ -54,7 +54,7 @@ class BrasilDada():
         df_casos = self.db.execute_query(query)
         df_casos['date'] = pd.to_datetime(df_casos['date'])
         if cumulative:
-            df_casos = df_casos.cumsum()
+            df_casos['sum'] = df_casos['sum'].cumsum()
             df_casos['date'] = pd.to_datetime(df_casos['date'])
         df_casos = df_casos.set_index('date')
         df_casos = df_casos.sort_index()
@@ -65,7 +65,7 @@ class BrasilDada():
         df_mortes = self.db.execute_query(query)
         df_mortes['date'] = pd.to_datetime(df_mortes['date'])
         if cumulative:
-            df_mortes = df_mortes.cumsum()
+            df_mortes['sum']  = df_mortes['sum'].cumsum()
             df_mortes['date'] = pd.to_datetime(df_mortes['date'])
         df_mortes = df_mortes.set_index('date')
         df_mortes = df_mortes.sort_index()
