@@ -53,22 +53,20 @@ class BrasilDada():
         query = f"SELECT date,sum(new_confirmed) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_casos = self.db.execute_query(query)
         df_casos['date'] = pd.to_datetime(df_casos['date'])
-        if cumulative:
-            df_casos['sum'] = df_casos['sum'].cumsum()
-            df_casos['date'] = pd.to_datetime(df_casos['date'])
         df_casos = df_casos.set_index('date')
         df_casos = df_casos.sort_index()
+        if cumulative:
+            df_casos['sum'] = df_casos['sum'].cumsum()
         return df_casos
     
     def get_mortes_time(self,city,start,end,cumulative=False):
         query = f"SELECT date,sum(new_deaths) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_mortes = self.db.execute_query(query)
         df_mortes['date'] = pd.to_datetime(df_mortes['date'])
-        if cumulative:
-            df_mortes['sum']  = df_mortes['sum'].cumsum()
-            df_mortes['date'] = pd.to_datetime(df_mortes['date'])
         df_mortes = df_mortes.set_index('date')
         df_mortes = df_mortes.sort_index()
+        if cumulative:
+            df_mortes['sum']  = df_mortes['sum'].cumsum()
         return df_mortes
 
     def calc_moving_average(self,column,city,start,end):
