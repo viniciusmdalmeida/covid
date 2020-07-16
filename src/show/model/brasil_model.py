@@ -62,6 +62,7 @@ class BrasilDada():
     def get_mortes_time(self,city,start,end,cumulative=False):
         query = f"SELECT date,sum(new_deaths) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_mortes = self.db.execute_query(query)
+        df_mortes['date'] = pd.to_datetime(df_mortes['date'])
         df_mortes = df_mortes.set_index('date')
         if cumulative:
             df_mortes = df_mortes.cumsum()
