@@ -24,7 +24,7 @@ class BrasilDada():
         df = df.set_index('date')
         df = df.sort_index()
         for col in df:
-            if df[col].iloc[-1]==0:
+            if len(df[col]) > 0 and df[col].iloc[-1]==0:
                 df = df[:-1]
         return df
 
