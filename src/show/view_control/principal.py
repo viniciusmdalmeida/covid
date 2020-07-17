@@ -28,7 +28,7 @@ layout = html.Div([
                                 className='custom-tab',
                                 selected_className='custom-tab--selected')
                 ],
-                value='mundo')
+                value='brasil')
         ]),
 
         #Conteudo de cada aba

@@ -184,4 +184,9 @@ def get_world_map(click_milhao):
         norm = False
     data_col = 'new_deaths'
     world_data = wdata.get_word_data(norm,data_col) 
-    return graficos.map_graph(world_data,'country',data_col,hover_name='country')
+    if norm:
+        nome = 'mortes Mi. hab'
+    else:
+        nome = 'total de mortes'
+    world_data = world_data.rename(columns={"country": "pais", data_col: nome})
+    return graficos.map_graph(world_data,'pais',nome,hover_name='pais')
