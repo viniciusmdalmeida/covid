@@ -133,6 +133,7 @@ class WorldHealth(WorlDataAbs):
         df_deaths = self.db.execute_query(query)
         df_deaths.date_reported = pd.to_datetime(df_deaths.date_reported)
         df_deaths = df_deaths.set_index('date_reported')
+        df_deaths[df_deaths<0] = 0
         if f_day:
             df_deaths = self.filter_firt_day(df_deaths,'new_deaths')
         if p_milhao:
@@ -154,6 +155,7 @@ class WorldHealth(WorlDataAbs):
         df_confirmed = self.db.execute_query(query)
         df_confirmed.date_reported = pd.to_datetime(df_confirmed.date_reported)
         df_confirmed = df_confirmed.set_index('date_reported')
+        df_confirmed[df_confirmed<0] = 0
         if f_day:
             df_confirmed = self.filter_firt_day(df_confirmed,'new_cases')
         if p_milhao:
@@ -175,6 +177,5 @@ class WorldHealth(WorlDataAbs):
             df = df.merge(populacao, on='country')
             df[data_col] = df[data_col]/df['country_population']    
         df['country'] = coco.convert(names=list(df['country']), to='ISO3')
-        print(df)
         return df
         

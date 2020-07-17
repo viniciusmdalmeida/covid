@@ -19,6 +19,15 @@ class BrasilDada():
     def __init__(self):
         self.db = dag_utils.Database()
 
+    def fix_df(self,df):
+        df['date'] = pd.to_datetime(df['date'])
+        df = df.set_index('date')
+        df = df.sort_index()
+        for col in df:
+            if df[col].iloc[-1]==0:
+                df = df[:-1]
+        return df
+
     def get_state(self,city):
         query = f"select distinct(state) from casos where city ='{city}'"
         df_state = self.db.execute_query(query)
@@ -27,13 +36,11 @@ class BrasilDada():
     def get_total_mortes(self,city,start,end):
         query = f"SELECT sum(new_deaths) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}'"
         sum_value = self.db.execute_query(query)
-        print("Total:",sum_value.iloc[0].values[0])
         return str(sum_value.iloc[0].values[0])
 
     def get_total_casos(self,city,start,end):
         query = f"SELECT sum(new_confirmed) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}'"
         sum_value = self.db.execute_query(query)
-        print("Total:",sum_value.iloc[0].values[0])
         return str(sum_value.iloc[0].values[0])
     
     def calc_status(self,city,start,end,column='new_deaths',period=14):
@@ -52,9 +59,7 @@ class BrasilDada():
     def get_casos_time(self,city,start,end,cumulative=False):
         query = f"SELECT date,sum(new_confirmed) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_casos = self.db.execute_query(query)
-        df_casos['date'] = pd.to_datetime(df_casos['date'])
-        df_casos = df_casos.set_index('date')
-        df_casos = df_casos.sort_index()
+        df_casos = self.fix_df(df_casos)
         if cumulative:
             df_casos['sum'] = df_casos['sum'].cumsum()
         return df_casos
@@ -62,9 +67,7 @@ class BrasilDada():
     def get_mortes_time(self,city,start,end,cumulative=False):
         query = f"SELECT date,sum(new_deaths) FROM casos_full WHERE {self.place_type} = '{city}' and date BETWEEN '{start}' AND '{end}' GROUP BY date"
         df_mortes = self.db.execute_query(query)
-        df_mortes['date'] = pd.to_datetime(df_mortes['date'])
-        df_mortes = df_mortes.set_index('date')
-        df_mortes = df_mortes.sort_index()
+        df_mortes = self.fix_df(df_mortes)
         if cumulative:
             df_mortes['sum']  = df_mortes['sum'].cumsum()
         return df_mortes
@@ -73,12 +76,8 @@ class BrasilDada():
         query =  f"select date,cast(avg({column}) as int) "\
             f"over(order by date asc rows between 7 preceding and current row) "\
             f"from casos_full where {self.place_type} = '{city}';"
-        print(query)
         df_moving = self.db.execute_query(query)
-        df_moving['date'] = pd.to_datetime(df_moving['date'])
-        df_moving = df_moving.set_index('date')
-        df_moving = df_moving.sort_index()
-        print(df_moving)
+        df_moving = self.fix_df(df_moving)
         return df_moving['avg']
     
     def get_option_place(self,place_type='city'):

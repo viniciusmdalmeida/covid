@@ -147,7 +147,8 @@ def show_input(clicks_cidades, clicks_estados):
         clicks_estados = 0
     #demais clicks
     if clicks_cidades != dash_var.attr['btn_cidades'] \
-    or clicks_cidades is None and clicks_estados is None:
+    or (clicks_cidades is None and clicks_estados is None) \
+    or (clicks_cidades == 0 and clicks_estados == 0):
         dash_var.update_attr(clicks_cidades,'btn_cidades')
         dict_data = mdata.get_option_place('city')
         return 'button-place','button-place-click',dict_data
