@@ -90,17 +90,18 @@ class HerokuApiDada(WorlDataAbs):
 
 
 class WorldHealth(WorlDataAbs):
-    def __init__(self):
-        self.db = dag_utils.Database(connection='connection_world')
+    def __init__(self,config_data_path='../..'):
+        self.db = dag_utils.Database(connection='connection_world',project_path=config_data_path)
         self.p_milhao = False
         self.f_day = False
 
     def filter_firt_day(self,df,col,reset_index=True):
         first_day = 0
         for index, value in df[col].items():
-            if value > 0:
-                first_day = value
+            if value and value > 0:
+                first_day = index
                 break
+        print("First_day:",first_day)
         first = df[first_day:]
         if reset_index:
             first =  first.reset_index()
@@ -179,3 +180,25 @@ class WorldHealth(WorlDataAbs):
         df['country'] = coco.convert(names=list(df['country']), to='ISO3')
         return df
         
+    def get_mortality_rate(self,country_code,start,end,
+                              cumulative=False,serie=False,f_day=False,p_milhao=False):
+        if f_day:
+            start = '2019-12-01'
+        query = f"SELECT date_reported,(new_deaths/NULLIF(CAST(new_cases as FLOAT),0)*100) as mortality_rate " \
+                f"FROM countries WHERE country_code='{country_code}' "\
+                f"and date_reported BETWEEN '{start}' AND '{end}';"
+        df_mortality_rate = self.db.execute_query(query)
+        df_mortality_rate.date_reported = pd.to_datetime(df_mortality_rate.date_reported)
+        df_mortality_rate = df_mortality_rate.set_index('date_reported')
+        df_mortality_rate[df_mortality_rate<0] = 0
+        if f_day:
+            df_mortality_rate = self.filter_firt_day(df_mortality_rate, 'mortality_rate')
+        if p_milhao:
+            query = f"SELECT country_population FROM locations WHERE country_code='{country_code}';"
+            populacao = self.db.execute_query(query)['country_population'][0] / 1000000
+            df_mortality_rate['mortality_rate'] = df_mortality_rate['mortality_rate'] / populacao
+        df_mortality_rate = df_mortality_rate.fillna(method='bfill')
+        if serie:
+            return df_mortality_rate['mortality_rate']
+        else:
+            return df_mortality_rate

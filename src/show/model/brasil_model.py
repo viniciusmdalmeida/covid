@@ -12,12 +12,13 @@ sys.path.append(src_path)
 from utils import dag_utils 
 
 class BrasilDada():
+    def __init__(self,config_data_path='../..'):
+        self.db = dag_utils.Database(project_path=config_data_path)
+
     def getIndex(self,valor):
         self.place_type = 'city'
         return datetime.strftime(valor, '%Y/%m')
 
-    def __init__(self):
-        self.db = dag_utils.Database()
 
     def fix_df(self,df):
         df['date'] = pd.to_datetime(df['date'])
@@ -99,4 +100,9 @@ class BrasilDada():
         #df_obitos = df_obitos.groupby(f'epidemiological_week_{year}').mean()
         df_obitos.columns = [x.split('_')[-2] for x in df_obitos.columns]
         return df_obitos
+
+    def get_interiorizacao(self,state,star,end):
+        query = f"SELECT * FROM obitos WHERE state = '{state}'"
+        df_obitos = self.db.execute_query(query)
+        return
 

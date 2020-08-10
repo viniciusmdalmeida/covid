@@ -65,9 +65,11 @@ class Graficos:
                     },
                     'yaxis': {
                         'title': y_nome,
+                        'fixedrange': True,
                     }
                 }
-            })
+            },
+            config={'scrollZoom': False})
         return grafico
 
 
@@ -99,9 +101,11 @@ class Graficos:
                     },
                     'yaxis': {
                         'title': y_nome,
+                        'fixedrange': True,
                     }
                 }
-            })
+            },
+            )
         return grafico
 
 
