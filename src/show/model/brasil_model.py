@@ -52,7 +52,7 @@ class BrasilDada():
                 data_zeros -= 1
             else:
                 break
-        df_mortes = df_mortes[data_zeros]
+        df_mortes = df_mortes[:data_zeros]
         df_moving_avg = df_mortes.rolling(window=7).mean()
         last_day = df_moving_avg[-1]
         period = df_moving_avg[-period]
