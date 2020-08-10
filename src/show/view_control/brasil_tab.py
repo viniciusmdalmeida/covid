@@ -205,9 +205,15 @@ def get_casos_novos(place,start,end):
     start = start[:10]
     end = end[:10]
     dict_grafico['casos'] = mdata.get_casos_time(place,start,end)['sum']
+    data_zeros = len(dict_grafico['casos'])
+    for data in reversed(dict_grafico['casos']):
+        if data == 0:
+            data_zeros -= 1
+        else:
+            break
     dict_grafico['media_movel'] = dict_grafico['casos'].rolling(window=7).mean()
     dict_grafico['media_movel'].index = pd.to_datetime(dict_grafico['media_movel'].index)
-    dict_grafico['media_movel'] = dict_grafico['media_movel'].sort_index()
+    dict_grafico['media_movel'] = dict_grafico['media_movel'].sort_index()[:data_zeros]
     return graficos.grafico_brasil(dict_grafico,
                                     titulo='Casos Diarios',x_nome='data',y_nome='casos')
 
@@ -222,9 +228,16 @@ def get_mortes_novas(place,start,end):
     start = start[:10]
     end = end[:10]
     dict_grafico['mortes'] = mdata.get_mortes_time(place,start,end)['sum']
+    data_zeros = len(dict_grafico['mortes'])
+    for data in reversed(dict_grafico['mortes']):
+        if data == 0:
+            data_zeros -= 1
+        else:
+            break
+    print(data_zeros)
     dict_grafico['media_movel'] = dict_grafico['mortes'].rolling(window=7).mean()
     dict_grafico['media_movel'].index = pd.to_datetime(dict_grafico['media_movel'].index)
-    dict_grafico['media_movel'] = dict_grafico['media_movel'].sort_index()
+    dict_grafico['media_movel'] = dict_grafico['media_movel'].sort_index()[:data_zeros]
     return graficos.grafico_brasil(dict_grafico,
                                     titulo='Mortes Diarias',x_nome='data',y_nome='mortes')
 

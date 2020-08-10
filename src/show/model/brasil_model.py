@@ -82,11 +82,7 @@ class BrasilDada():
         df_moving = self.db.execute_query(query)
         df_moving = self.fix_df(df_moving)
         data_zeros = 0
-        for data in reversed(df_moving['avg']):
-            if data == 0:
-                data_zeros +=1
-            else:
-                break
+
         return df_moving['avg'][:-data_zeros]
     
     def get_option_place(self,place_type='city'):
