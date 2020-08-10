@@ -46,6 +46,13 @@ class BrasilDada():
     
     def calc_status(self,city,start,end,column='new_deaths',period=14):
         df_mortes = self.get_mortes_time(city,start,end)['sum']
+        data_zeros = len(df_mortes)
+        for data in reversed(df_mortes):
+            if data == 0:
+                data_zeros -= 1
+            else:
+                break
+        df_mortes = df_mortes[data_zeros]
         df_moving_avg = df_mortes.rolling(window=7).mean()
         last_day = df_moving_avg[-1]
         period = df_moving_avg[-period]
