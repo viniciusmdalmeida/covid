@@ -7,8 +7,8 @@ import shutil
 import requests
 
 #Path config
-data_path = '../../data/raw/'
-config_data_path = '../../config/data_config.yaml'
+data_path = '/root/covid/data/raw/'
+config_data_path = '/root/covid/config/data_config.yaml'
 
 #Links download dados
 link_brasil_io = 'https://data.brasil.io/dataset/covid19/'
