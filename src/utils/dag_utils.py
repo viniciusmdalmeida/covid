@@ -13,13 +13,13 @@ class DashVariables:
         self.attr[attr] = value
 
 class Database:
-    def __init__(self,connection='connection'):
+    def __init__(self,connection='connection',project_path='../..'):
         self.connection=connection
+        self.project_path = project_path
 
     def connect(self,config_data=None):
         if config_data is None:
-            project_path = '../..'
-            conf_path = f'{project_path}/config'
+            conf_path = f'{self.project_path}/config'
             conf_data_path = f'{conf_path}/data_config.yaml'
             config_data_file = open(conf_data_path)
             config_data = yaml.load(config_data_file, Loader=yaml.FullLoader)

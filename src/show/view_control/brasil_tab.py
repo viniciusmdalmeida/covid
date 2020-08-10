@@ -115,7 +115,7 @@ layout = [
                     html.Div([],
                             id='city_mortes_acum', 
                             className='six columns grafico',
-                            style={'padding':'5px'})
+                            style={'padding':'5px'}),
                 ],
                 className='row'),
             html.Div([],id='graph_states_obitos', className='row',style={'padding':'5px'}),

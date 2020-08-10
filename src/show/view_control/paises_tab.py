@@ -85,6 +85,7 @@ layout = [
             html.Div([],id='mortes_novos', className='row',style={'padding':'5px'}),
             html.Div([],id='world_confirmed_acum',className='row',style={'padding':'5px'}),
             html.Div([],id='casos_novos', className='row',style={'padding':'5px'}),
+            html.Div([],id='world_taxa_mortalidade', className='row',style={'padding':'5px'}),
         ],
         className="container",
         id='conteiner'
@@ -190,3 +191,33 @@ def get_world_map(click_milhao):
         nome = 'total de mortes'
     world_data = world_data.rename(columns={"country": "pais", data_col: nome})
     return graficos.map_graph(world_data,'pais',nome,hover_name='pais')
+
+
+@app.callback(
+    Output("world_taxa_mortalidade", "children"),
+    [Input("world_dropdown", "value"),
+     Input("world_dataRange", "start_date"),
+     Input("world_dataRange", "end_date"),
+     Input("btn_milhao", "n_clicks"),
+     Input("btn_primeiro_caso", "n_clicks")]
+)
+def get_taxa_mortalidade(list_countrys,start,end,click_milhao,click_f_day):
+    if click_milhao and click_milhao % 2 == 1:
+        p_milhao = True
+    else:
+        p_milhao = False
+    if click_f_day and click_f_day % 2 == 1:
+        f_day = True
+        x_nome = "Dias após primeiro caso"
+    else:
+        f_day = False
+        x_nome = "Data"
+
+    dict_data = {}
+    for country_code in list_countrys:
+        dict_data[country_code] = wdata.get_mortality_rate(country_code, start, end,
+                                                                 serie=True, p_milhao=p_milhao, f_day=f_day)
+    return graficos.grafico_temporal(dict_data,
+                                     titulo='Taxa de mortalidade',
+                                     x_nome=x_nome,
+                                     y_nome='casos')
