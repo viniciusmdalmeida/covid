@@ -50,6 +50,8 @@ class BrasilDada():
         last_day = df_moving_avg[-1]
         period = df_moving_avg[-period]
         value = last_day/period
+        if last_day < 5 and period < 5:
+            return f'Estavel'
         if value > 1.15:
             return f'Subindo {(value - 1)*100:.0f}%'
         if value < 0.85:
@@ -79,7 +81,13 @@ class BrasilDada():
             f"from casos_full where {self.place_type} = '{city}';"
         df_moving = self.db.execute_query(query)
         df_moving = self.fix_df(df_moving)
-        return df_moving['avg']
+        data_zeros = 0
+        for data in reversed(df_moving['avg']):
+            if data == 0:
+                data_zeros +=1
+            else:
+                break
+        return df_moving['avg'][:-data_zeros]
     
     def get_option_place(self,place_type='city'):
         query = f"SELECT DISTINCT {place_type} FROM casos_full WHERE place_type = '{place_type}'"
